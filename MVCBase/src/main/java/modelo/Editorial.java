@@ -10,7 +10,6 @@ public class Editorial {
 	
 	
 	public Editorial(int codEditorial, String nombre, int año) {
-		super();
 		this.codEditorial = codEditorial;
 		this.nombre = nombre;
 		this.año = año;
@@ -19,6 +18,12 @@ public class Editorial {
 
 	public Editorial() {
 	
+	}
+
+
+	public Editorial(String nombre, int año) {
+		this.nombre = nombre;
+		this.año = año;
 	}
 
 

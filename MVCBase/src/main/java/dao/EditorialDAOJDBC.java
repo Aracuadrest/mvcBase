@@ -32,9 +32,10 @@ public class EditorialDAOJDBC implements EditorialDAO {
 			consulta = c.createStatement();
 			rs= consulta.executeQuery("select * from editoriales");
 			while(rs.next()) {
+				
 				int codEditorial = rs.getInt("codEditorial");
 				String nombre = rs.getString("nombre");
-				int año = rs.getInt("año");
+				int año = rs.getInt("anio");
 				
 				Editorial editorial = new Editorial(codEditorial, nombre, año);
 				lista.add(editorial);
@@ -76,7 +77,7 @@ public class EditorialDAOJDBC implements EditorialDAO {
 			if(rs.next()) {
 				
 				String nombre = rs.getString("nombre");
-				int año = rs.getInt("año");
+				int año = rs.getInt("anio");
 				
 				editorial = new Editorial(codEditorial,nombre, año);
 				
@@ -110,7 +111,7 @@ public class EditorialDAOJDBC implements EditorialDAO {
 		int num=0;
 		
 		try {
-			consulta = c.prepareStatement("insert into editoriales(nombre,año) values (?,?)");
+			consulta = c.prepareStatement("insert into editoriales(nombre,anio) values (?,?)");
 			
 			consulta.setString(1, editorial.getNombre());
 			consulta.setInt(2, editorial.getAño());
@@ -141,14 +142,78 @@ public class EditorialDAOJDBC implements EditorialDAO {
 
 	@Override
 	public int editarEditorial(Editorial editorial) {
-		// TODO Esbozo de método generado automáticamente
-		return 0;
+		Connection c = conexion.getConexion();
+		PreparedStatement consulta = null;
+		int num=0;
+		
+		try {
+			consulta = c.prepareStatement("UPDATE editoriales\r\n"
+					+ "SET\r\n"
+					+ "nombre = ?,\r\n"
+					+ "anio = ?\r\n"
+					+ "WHERE codEditorial = ?");
+			
+			consulta.setString(1, editorial.getNombre());
+			consulta.setInt(2, editorial.getAño());
+			consulta.setInt(3, editorial.getCodEditorial());
+			
+			num= consulta.executeUpdate();
+			System.out.println("Editorial actualizada correctamente");
+				
+			
+			
+		} catch (SQLException e) {
+			System.out.println("Error actualizando editorial");
+			e.printStackTrace();
+		} finally {
+			
+			try {
+			
+				consulta.close();
+				conexion.cerrarConexion();
+				
+			} catch (SQLException e) {
+				// TODO Bloque catch generado automáticamente
+				e.printStackTrace();
+			}
+			
+		}		
+		return num;
 	}
 
 	@Override
 	public int eliminarEditorial(int codEditorial) {
-		// TODO Esbozo de método generado automáticamente
-		return 0;
+		Connection c = conexion.getConexion();
+		PreparedStatement consulta = null;
+		int num=0;
+		
+		try {
+			consulta = c.prepareStatement("delete from editoriales where codEditorial=?");
+			
+			consulta.setInt(1, codEditorial);
+			
+			num= consulta.executeUpdate();
+			System.out.println("Editorial eliminada correctamente");
+				
+			
+			
+		} catch (SQLException e) {
+			System.out.println("Error eliminando editorial"+codEditorial);
+			e.printStackTrace();
+		} finally {
+			
+			try {
+			
+				consulta.close();
+				conexion.cerrarConexion();
+				
+			} catch (SQLException e) {
+				// TODO Bloque catch generado automáticamente
+				e.printStackTrace();
+			}
+			
+		}		
+		return num;
 	}
 
 }
