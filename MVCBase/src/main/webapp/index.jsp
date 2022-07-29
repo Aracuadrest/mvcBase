@@ -3,7 +3,13 @@
 
 <jsp:include page="plantillas/cabecera.jsp"></jsp:include>
 
-<a href=""></a>
+<nav>
+	<ul>
+		<li>
+			<a href="libros">Gestión de Libros</a>
+		</li>
+	</ul>
+</nav>
 
 
 

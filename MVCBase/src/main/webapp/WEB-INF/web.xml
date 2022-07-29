@@ -19,4 +19,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>EditorialesServlet</display-name>
+    <servlet-name>EditorialesServlet</servlet-name>
+    <servlet-class>controladores.EditorialesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditorialesServlet</servlet-name>
+    <url-pattern>/Editoriales</url-pattern>
+  </servlet-mapping>
 </web-app>

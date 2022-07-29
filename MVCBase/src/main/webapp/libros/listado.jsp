@@ -4,6 +4,7 @@
 <%@ page import ="java.util.List"%>
 <jsp:include page="../plantillas/cabecera.jsp"></jsp:include>
 
+<a href="?opcion=nuevo">Insertar libro</a>
 <h2>Listado de libros</h2>
 
 <% List<Libro> lista = (List<Libro>)request.getAttribute("listaLibros"); 
@@ -23,6 +24,8 @@
 			<th>Precio</th>
 			<th>Cantidad</th>
 			<th>PrecioCD</th>
+			<th>Eliminar</th>
+			<th>Editar</th>
 		</tr>
 		<%
 		for(Libro l : lista){
@@ -36,6 +39,8 @@
 				<td><%=l.getPrecio() %></td>
 				<td><%=l.getCantidad() %></td>
 				<td><%=l.getPrecioCD() %></td>
+				<td><a href="?opcion=eliminar&isbn=<%=l.getIsbn() %>">X</a></td>
+				<td><a href="?opcion=editar&isbn=<%=l.getIsbn() %>">Editar</a></td>
 			</tr>
 			<%
 			}
